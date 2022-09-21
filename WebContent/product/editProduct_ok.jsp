@@ -15,8 +15,8 @@
 %>
 	<script type="text/javascript">
 		alert("수정됐습니다.");
+		location.href="adminIndex.jsp?pages=../product/productList&pageNum=<%= pageNum %>";
 	</script>
 <%		
-		response.sendRedirect("adminIndex.jsp?pages=../product/productList&pageNum="+"pageNum");
 	}
 %>

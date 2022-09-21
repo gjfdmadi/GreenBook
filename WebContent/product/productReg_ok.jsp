@@ -58,9 +58,19 @@
 			int re = updb.insertUploadProduct(product);
 			
 			if(re == 1){
-				response.sendRedirect("adminIndex.jsp?pages=../product/productList&pageNum="+"pageNum");
+		%>
+				<script type="text/javascript">
+					alert("상품을 등록했습니다.");
+					location.href="adminIndex.jsp?pages=../product/productList";
+				</script>
+		<%		
 			}else{
-				response.sendRedirect("adminIndex.jsp?pages=../product/productReg&pageNum="+"pageNum");
+		%>
+				<script type="text/javascript">
+					alert("상품등록 실패.");
+					location.href="adminIndex.jsp?pages=../product/productList";
+				</script>
+		<%		
 			}
 	%>
 </body>

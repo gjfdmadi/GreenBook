@@ -48,7 +48,7 @@ if (upbd != null) {
 <body class="vertical  dark  ">
 	<div class="wrapper">
 		<main role="main" class="main-content">
-			<form name="up_prodc" action="admin_main.jsp?page=../product/productReg_ok.jsp&product_number=<%=product_number%>&pageNum=<%=pageNum%>" method="post" enctype="multipart/form-data">
+			<form name="up_prodc" action="adminIndex.jsp?pages=../product/productReg_ok&product_number=<%=product_number%>&pageNum=<%=pageNum%>" method="post" enctype="multipart/form-data">
 				<div class="container-fluid">
 					<div class="row justify-content-center">
 						<div class="col-12">
@@ -112,7 +112,6 @@ if (upbd != null) {
 												</div>
 											</div>
 										</div>
-
 										<table>
 											<tr>
 												<td>

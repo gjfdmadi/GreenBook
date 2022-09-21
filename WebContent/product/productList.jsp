@@ -87,7 +87,7 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 										<tr>
 											<th>
 												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="all2"> <label class="custom-control-label" for="all2"></label>
+													<input type="checkbox" class="custom-control-input" id="all2"> <label class="custom-control-label" for="all2">NO</label>
 												</div>
 											</th>
 											<th>상품명</th>
@@ -113,8 +113,8 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 											create_date = updb.getImg(product_number).getCreate_date();
 										%>
 										<tr>
-											<td align="center"><input type="checkbox" name="productNum_select"><%=product_number%></td>
-											<td width="200" height="100"><img src="${pageContext.request.contextPath}/img/<%=stored_file_name%>" style="padding-right: 30px;"><%=product_name%> <!--	<img src="<%=path%>\<%=stored_file_name%>" style="padding-right: 30px;"><%=product_name%>--></td>
+											<td><input type="checkbox" name="productNum_select">NO.<%=product_number%></td>
+											<td width="200" height="100"><img src="${pageContext.request.contextPath}/img/<%=stored_file_name%>" style="padding-right: 30px;"><br>상품명:<%=product_name%> <!--	<img src="<%=path%>\<%=stored_file_name%>" style="padding-right: 30px;"><%=product_name%>--></td>
 											<td><%=product_price%>원</td>
 											<td><%=category_code%></td>
 											<td><%=product_stock%>개</td>

@@ -56,13 +56,13 @@ public class ProductDBBean {
 				number = 1;
 			}
 			
-			System.out.println("@@@### number ===>"+number);
-			System.out.println("@@@### product.getCategory_code() ===>"+product.getCategory_code());			
-			System.out.println("@@@### product.getProduct_name() ===>"+product.getProduct_name());
-			System.out.println("@@@### product.getProduct_price() ===>"+product.getProduct_price());
-			System.out.println("@@@### product.getProduct_stock() ===>"+product.getProduct_stock());
-			System.out.println("@@@### board.getProduct_desc() ===>"+product.getProduct_desc());
-			System.out.println("@@@### board.getProduct_date() ===>"+product.getProduct_date());
+//			System.out.println("@@@### number ===>"+number);
+//			System.out.println("@@@### product.getCategory_code() ===>"+product.getCategory_code());			
+//			System.out.println("@@@### product.getProduct_name() ===>"+product.getProduct_name());
+//			System.out.println("@@@### product.getProduct_price() ===>"+product.getProduct_price());
+//			System.out.println("@@@### product.getProduct_stock() ===>"+product.getProduct_stock());
+//			System.out.println("@@@### board.getProduct_desc() ===>"+product.getProduct_desc());
+//			System.out.println("@@@### board.getProduct_date() ===>"+product.getProduct_date());
 			
 			sql="INSERT INTO product VALUES(?,?,?,?,?,?,?,0)";
 			pstmt = conn.prepareStatement(sql);
@@ -78,12 +78,12 @@ public class ProductDBBean {
 			//pstmt.setInt(8, product.getProduct_ordered_count());
 			pstmt.executeUpdate();
 			
-			System.out.println("@@@### number ===>"+number);
-			System.out.println("@@@### number ===>"+number);
-			System.out.println("@@@### product.getOrgin_file_name() ===>"+product.getOrgin_file_name());
-			System.out.println("@@@### product.getStored_file_name() ===>"+product.getStored_file_name());
-			System.out.println("@@@### product.getStored_file_name() ===>"+product.getFile_size());
-			System.out.println("@@@### product.getStored_file_name() ===>"+product.getCreate_date());
+//			System.out.println("@@@### number ===>"+number);
+//			System.out.println("@@@### number ===>"+number);
+//			System.out.println("@@@### product.getOrgin_file_name() ===>"+product.getOrgin_file_name());
+//			System.out.println("@@@### product.getStored_file_name() ===>"+product.getStored_file_name());
+//			System.out.println("@@@### product.getStored_file_name() ===>"+product.getFile_size());
+//			System.out.println("@@@### product.getStored_file_name() ===>"+product.getCreate_date());
 			
 			//이미지 insert
 			sql="INSERT INTO product_imagefile VALUES(?,?,?,?,?,?)";
@@ -98,7 +98,7 @@ public class ProductDBBean {
 			pstmt.executeUpdate();
 			
 			
-			System.out.println("@@@### product.getCategory_code() ===>"+product.getCategory_code());	
+			//System.out.println("@@@### product.getCategory_code() ===>"+product.getCategory_code());	
 			//카테고리 코드 insert
 			sql="INSERT INTO product_category VALUES(?,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class ProductDBBean {
 				+ ",product_stock \r \n"
 				+ ",product_date \r \n"
 				+ "FROM PRODUCT \r \n"
-				+ "ORDER BY product_number ASC";
+				+ "ORDER BY product_number DESC";
 		String sql2 = "SELECT COUNT(product_number) from product";
 
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
