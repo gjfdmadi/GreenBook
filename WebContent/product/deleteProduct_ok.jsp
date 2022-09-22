@@ -1,8 +1,8 @@
 <%@page import="java.io.File"%>
 <%@page import="semiProject.uploadProduct.ProductBean"%>
 <%@page import="semiProject.uploadProduct.ProductDBBean"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String pageNum = request.getParameter("pageNum");
 
@@ -23,13 +23,13 @@
 	//System.out.print("re ======= >"+re);
 	
 	if(re == 1) {
-		if(fname != null) {//¾÷·Îµå ÆÄÀÏ »èÁ¦
-			File file = new File(path+"\\"+fname);  //»ı¼ºÀÚ ¸Å°³º¯¼ö: Æú´õ°æ·Î+ÆÄÀÏÀÌ¸§
-			file.delete();//ÆÄÀÏ »èÁ¦ÇÏ´Â ÄÚµå
+		if(fname != null) {//ì—…ë¡œë“œ íŒŒì¼ ì‚­ì œ
+			File file = new File(path+"\\"+fname);  //ìƒì„±ì ë§¤ê°œë³€ìˆ˜: í´ë”ê²½ë¡œ+íŒŒì¼ì´ë¦„
+			file.delete();//íŒŒì¼ ì‚­ì œí•˜ëŠ” ì½”ë“œ
 		}
 %>
 		<script type="text/javascript">
-			alert("»èÁ¦µÆ½À´Ï´Ù.");
+			alert("ì‚­ì œëìŠµë‹ˆë‹¤.");
 			location.href="adminIndex.jsp?pages=../product/productList&product_number=<%=product_number%>&pageNum=<%= pageNum %>";
 		</script>
 <%		
