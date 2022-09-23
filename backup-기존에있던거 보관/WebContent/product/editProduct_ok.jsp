@@ -1,12 +1,17 @@
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("UTF-8"); %>
+<%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <jsp:useBean id="upbd" class="semiProject.uploadProduct.ProductBean"></jsp:useBean>
 <jsp:setProperty property="*" name="upbd"/>
 <%
 	String pageNum = request.getParameter("pageNum");
 	
+	String pdna = request.getParameter("product_name");
+	System.out.println("name=================>>>>>>>>>>>>>>>>>+>+>++>"+pdna);
+
 	ProductDBBean updb = ProductDBBean.getInstance();
 	int re = updb.updateProduct(upbd);
 	System.out.println("실행시출력");

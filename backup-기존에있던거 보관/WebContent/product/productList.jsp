@@ -5,6 +5,7 @@
 <%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("utf-8");
 	String pageNum = request.getParameter("pageNum");//페이지 넘버 가져오기
 
 if (pageNum == null) {
@@ -47,8 +48,8 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 <!-- Date Range Picker CSS -->
 <link rel="stylesheet" href="css/daterangepicker.css">
 <!-- App CSS -->
-<link rel="stylesheet" href="css/app-light.css" id="lightTheme" disabled>
-<link rel="stylesheet" href="css/app-dark.css" id="darkTheme">
+<link rel="stylesheet" href="css/app-light.css" id="lightTheme">
+<link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
         function show_product(){
@@ -60,9 +61,8 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
         }
     </script>
 </head>
-<body class="vertical  dark  ">
+<body class="vertical  light  ">
 	<div class="wrapper">
-		<main role="main" class="main-content">
 			<div class="container-fluid">
 				<div class="row justify-content-center">
 					<div class="col-12">
@@ -75,7 +75,7 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 									<span class="fe fe-trash fe-12 mr-2"></span>Delete
 								</button>
 								<button type="button" class="btn btn-primary">
-									<span class="fe fe-filter fe-12 mr-2"></span>Create
+									<span class="fe fe-filter fe-12 mr-2"></span><a href="adminIndex.jsp?pages=../product/productReg" style="color: white;">Create</a>
 								</button>
 							</div>
 						</div>
@@ -87,7 +87,7 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 										<tr>
 											<th>
 												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="all2"> <label class="custom-control-label" for="all2">NO</label>
+													<input type="checkbox" class="custom-control-input allCheck" id="all2"> <label class="custom-control-label" for="all2">NO</label>
 												</div>
 											</th>
 											<th>상품명</th>
@@ -113,8 +113,8 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 											create_date = updb.getImg(product_number).getCreate_date();
 										%>
 										<tr>
-											<td><input type="checkbox" name="productNum_select">NO.<%=product_number%></td>
-											<td width="200" height="100"><img src="${pageContext.request.contextPath}/img/<%=stored_file_name%>" style="padding-right: 30px;"><br>상품명:<%=product_name%> <!--	<img src="<%=path%>\<%=stored_file_name%>" style="padding-right: 30px;"><%=product_name%>--></td>
+											<td><input type="checkbox" class="check" >NO.<%=product_number%></td>
+											<td><img style="width: 100px" height="100px" src="${pageContext.request.contextPath}/img/<%=stored_file_name%>"><br>상품명:<%=product_name%></td>
 											<td><%=product_price%>원</td>
 											<td><%=category_code%></td>
 											<td><%=product_stock%>개</td>
@@ -270,7 +270,6 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 					</div>
 				</div>
 			</div>
-		</main>
 		<!-- main -->
 	</div>
 	<!-- .wrapper -->
@@ -315,6 +314,21 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 		}
 		gtag('js', new Date());
 		gtag('config', 'UA-56159088-1');
+		
+		var allCheck = document.querySelector(".allCheck");
+		var list = document.querySelectorAll(".check");
+		
+		allCheck.onclick = ()=>{
+			if(allCheck.checkecd){
+				for(var i=0;i<.length;i++) {
+					list[i].checked = true;
+				}
+			}else {
+				for(var i=0;i<list.length;i++) {
+					list[i].checked = false;
+				}
+			}
+		}
 	</script>
 </body>
 </html>

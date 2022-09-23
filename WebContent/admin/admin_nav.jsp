@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<ul class="navbar-nav flex-fill w-100 mb-2">
@@ -20,6 +21,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="adminIndex.jsp?pages=../product/productList"><span class="ml-1 item-text">상품 정보 조회</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="adminIndex.jsp?pages=../user/index"><span class="ml-1 item-text">상품</span></a>
                 </li>
               </ul>
             </li>

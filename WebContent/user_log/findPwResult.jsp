@@ -35,8 +35,6 @@
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
 	
-	System.out.println("email.......>>>>>>>>"+email);
-	
 	MemberDBBean pw_check = new MemberDBBean();
 	String lastPhone = MemberDBBean.getInstance().getMember(id).getUser_phone3();
 	String ramdomNum = pw_check.getRamdomPassword(4);
@@ -47,6 +45,7 @@
 	//int result = pw_check.pwCheckMember(ramPhon, id, name, email);
 	int result = pw_check.pwCheckMember(ramPhon, id, name, email);
 %>
+<%= email %>
   <body class="light ">
     <div class="wrapper vh-100">
       <div class="row align-items-center h-100">

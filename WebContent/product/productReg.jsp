@@ -1,24 +1,26 @@
-<%@page import="semiProject.uploadProduct.ProductBean"%>
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="product.ProductBean"%>
+<%@page import="product.ProductDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
 	int product_number = 0;
-String pageNum = request.getParameter("pageNum");
-String product_name = "";
-
-if (request.getParameter("product_number") != null) {
-	product_number = Integer.parseInt(request.getParameter("product_number"));
-}
-
-ProductDBBean updb = ProductDBBean.getInstance();
-ProductBean upbd = updb.getproduct(product_number, false);
-
-if (upbd != null) {
-	product_name = upbd.getProduct_name();
-}
+	String pageNum = request.getParameter("pageNum");
+	String product_name = "";
+	
+	if (request.getParameter("product_number") != null) {
+		product_number = Integer.parseInt(request.getParameter("product_number"));
+	}
+	
+	ProductDBBean updb = ProductDBBean.getInstance();
+	ProductBean upbd = updb.getproduct(product_number, false);
+	
+	if (upbd != null) {
+		product_name = upbd.getProduct_name();
+	}
 %>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,71 +45,77 @@ if (upbd != null) {
 <!-- App CSS -->
 <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
 <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
-<script language="JavaScript" src="../js/uploadProduct.js" charset="utf-8"></script>
+<script language="JavaScript" src="js/uploadProduct.js" charset="utf-8"></script>
 </head>
 <body class="vertical  dark  ">
 	<div class="wrapper">
-			<form name="up_prodc" action="adminIndex.jsp?pages=../product/productReg_ok&product_number=<%=product_number%>&pageNum=<%=pageNum%>" method="post" enctype="multipart/form-data">
-		        <div class="container-fluid">
-		          <div class="row justify-content-center">
-		            <div class="col-12">
-		              <h2 class="page-title">상품등록</h2>
-		              <p class="text-muted">상품등록을 위한 폼입니다.</p>
-		              
-		                <div class="card-body">
-		                    
-		                  <div class="row">
-		                      <div class="col-md-12">
-		                        <div class="form-group mb-3">
-		                            <label for="custom-select">상품 카테고리</label>
-		                            <select class="custom-select" id="custom-select" name="category_code">
-		                            <option selected value="none">=== 선택 ===</option>
-		                            <option value="t-shirt">티셔츠</option>
-		                            <option value="hude-t">후드티</option>
-		                            <option value="nite">니트/스웨터</option>
-		                            <option value="shirt">셔츠/남방</option>
-		                            <option value="pants">바지</option>
-		                            <option value="blue-jeans">청바지</option>
-		                            </select>
-		                          </div>
-		                      <div class="form-group mb-3">
-		                        <label for="simpleinput">상품명</label>
-		                        <input type="text" name="product_name" class="form-control">
-		                      </div>
-		                      <div class="form-group mb-3">
-		                        <label class="product_name_label">상품 가격</label>
-		                        <input type="number" name="product_price" class="form-control" placeholder="원" >
-		                      </div>
-		                      <div class="form-group mb-3">
-		                        <label class="product_stock">재고 수량</label>
-		                        <input type="number" name="product_stock" class="form-control" placeholder="개">
-		                      </div>
-		                      <div class="form-group mb-3">
-		                        <label for="example-textarea">상품 설명</label>
-		                        <textarea class="form-control" id="example-textarea" rows="4" name="product_desc"></textarea>
-		                      </div>
-		                      <div class="form-group col-md-12 mb-3">
-		                      <label for="example-fileinput">이미지</label>
-		                      <br>
-		                      <input type="file" id="example-fileinput" class="form-control-file" name="product_img">
-		                      </div>
-		                      
-		                      <input type="button" class="btn mb-2 btn-primary" value="상품 등록" onclick="check_ok()"></input>
-                      <input type="reset" class="btn mb-2 btn-danger" value="다시 작성"></input>
-                      <input type="button" class="btn mb-2 btn-info" value="등록한 상품 목록" onclick="location.href='adminIndex.jsp?pages=../product/productList'"></input>
-		                    </div> <!-- /.col -->
-		                </div> <!-- row /.col -->
-		                </div> <!-- card -->
-		              </div> <!-- end section -->
-		            </div> <!-- .col-12 -->
-		          </div> <!-- .row -->
-		          
-		        </div> <!-- .container-fluid -->
-			</form>
-			</div>
-		<!-- main -->
-	</div>
+		<form method="post" name="reg_frm" action="productReg_ok.jsp" enctype="multipart/form-data">
+	        <div class="container-fluid">
+	          <div class="row justify-content-center">
+	            <div class="col-12">
+	              <h2 class="h3 mb-3 page-title">상품등록</h2>
+	                <div class="card shadow">
+	                	<div class="card-body">
+	                  <div class="row">
+	                      <div class="col-md-12">
+	                        <div class="form-group mb-3">
+	                            <label for="custom-select">상품 카테고리</label>
+	                            <select class="custom-select" id="custom-select" name="category_code">
+	                            <option selected value="none">카테고리를 선택하세요</option>
+	                            <option value="t-shirt">티셔츠</option>
+	                            <option value="hude-t">후드티</option>
+	                            <option value="nite">니트/스웨터</option>
+	                            <option value="shirt">셔츠/남방</option>
+	                            <option value="pants">바지</option>
+	                            <option value="blue-jeans">청바지</option>
+	                            </select>
+	                          </div>
+	                      <div class="form-group mb-3">
+	                        <label for="productName">상품명</label>
+	                        <input type="text" id="productName" name="product_name" class="form-control" />
+	                      </div>
+	                      <div class="form-group mb-3">
+	                        <label for="productPrice">상품 가격(원)</label>
+	                        <input type="number" id="productPrice" name="product_price" class="form-control" />
+	                      </div>
+	                      <div class="form-group mb-3">
+	                        <label for="productStock">재고 수량(개)</label>
+	                        <input type="number" id="productStock" name="product_stock" class="form-control" />
+	                      </div>
+	                      <div class="form-group mb-3">
+	                       <label for="content">상품 상세 설명</label>
+	                 		<div id="editor" style="min-height:500px;" contenteditable="true">
+	                 		</div>
+	                  		<input type="hidden" value="" name="product_desc" id="content">
+	                      </div>
+	                      <div class="form-group mb-3">
+	                      <label for="fileinput">이미지</label>
+	                      <!-- <input type="file" id="example-fileinput" class="form-control-file" name="product_img" onchange="setThumbnail(event);" />
+							<div id="image_container" style="width: 150px; height: 150px;"></div>
+	                      </div> -->
+	                        <!-- 첨부파일(이미지파일만 업로드가능) -->
+							<input type="file" id="fileinput" name="product_img" accept="image/*">
+							
+							<!-- 이미지 미리보기 영역 -->
+							<div id="imgViewArea" style="margin-top:10px; display:none;">
+								<img id="imgArea" style="width:200px; height:200px;" onerror="imgAreaError()"/>
+							</div>
+	                      <div style="text-align:center;">
+	                      <input type="button" class="btn mb-2 btn-primary" value="목록" onclick="location.href='adminIndex.jsp?pages=productList'" />
+	                      <input type="reset" class="btn mb-2 btn-primary" value="다시 작성" />
+	                      <input type="button" class="btn mb-2 btn-primary" value="등록" onclick="check_ok()" />
+	                      </div>
+	                    </div> <!-- /.col -->
+	               		 </div> <!-- row /.col -->
+	               		 </div> <!-- card -->
+	             	 </div> <!-- end section -->
+	           	 </div> <!-- .col-12 -->
+	          	</div> <!-- .row -->
+	          </div> <!-- .row -->
+		</form>
+     </div> <!-- .container-fluid -->
 	<!-- .wrapper -->
+    <script src="js/jquery.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/moment.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -117,242 +125,121 @@ if (upbd != null) {
 	<script src="js/tinycolor-min.js"></script>
 	<script src="js/config.js"></script>
 	<script src="js/d3.min.js"></script>
-	<script src="js/topojson.min.js"></script>
-	<script src="js/datamaps.all.min.js"></script>
-	<script src="js/datamaps-zoomto.js"></script>
-	<script src="js/datamaps.custom.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script>
-      /* defind global options */
-      Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
-      Chart.defaults.global.defaultFontColor = colors.mutedColor;
-    </script>
 	<script src="js/gauge.min.js"></script>
 	<script src="js/jquery.sparkline.min.js"></script>
-	<script src="js/apexcharts.min.js"></script>
-	<script src="js/apexcharts.custom.js"></script>
 	<script src='js/jquery.mask.min.js'></script>
 	<script src='js/select2.min.js'></script>
 	<script src='js/jquery.steps.min.js'></script>
 	<script src='js/jquery.validate.min.js'></script>
 	<script src='js/jquery.timepicker.js'></script>
-	<script src='js/dropzone.min.js'></script>
-	<script src='js/uppy.min.js'></script>
-	<script src='js/quill.min.js'></script>
-	<script>
-      $('.select2').select2(
-      {
-        theme: 'bootstrap4',
-      });
-      $('.select2-multi').select2(
-      {
-        multiple: true,
-        theme: 'bootstrap4',
-      });
-      $('.drgpicker').daterangepicker(
-      {
-        singleDatePicker: true,
-        timePicker: false,
-        showDropdowns: true,
-        locale:
-        {
-          format: 'MM/DD/YYYY'
-        }
-      });
-      $('.time-input').timepicker(
-      {
-        'scrollDefault': 'now',
-        'zindex': '9999' /* fix modal open */
-      });
-      /** date range picker */
-      if ($('.datetimes').length)
-      {
-        $('.datetimes').daterangepicker(
-        {
-          timePicker: true,
-          startDate: moment().startOf('hour'),
-          endDate: moment().startOf('hour').add(32, 'hour'),
-          locale:
-          {
-            format: 'M/DD hh:mm A'
-          }
-        });
-      }
-      var start = moment().subtract(29, 'days');
-      var end = moment();
 
-      function cb(start, end)
-      {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-      }
-      $('#reportrange').daterangepicker(
-      {
-        startDate: start,
-        endDate: end,
-        ranges:
+	<script>
+    // editor
+    var editor = document.getElementById('editor');
+    if (editor)
+    {
+      var toolbarOptions = [
+        [
         {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-      }, cb);
-      cb(start, end);
-      $('.input-placeholder').mask("00/00/0000",
-      {
-        placeholder: "__/__/____"
-      });
-      $('.input-zip').mask('00000-000',
-      {
-        placeholder: "____-___"
-      });
-      $('.input-money').mask("#.##0,00",
-      {
-        reverse: true
-      });
-      $('.input-phoneus').mask('(000) 000-0000');
-      $('.input-mixed').mask('AAA 000-S0S');
-      $('.input-ip').mask('0ZZ.0ZZ.0ZZ.0ZZ',
-      {
-        translation:
+          'font': []
+        }],
+        [
         {
-          'Z':
-          {
-            pattern: /[0-9]/,
-            optional: true
-          }
+          'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [
+        {
+          'header': 1
         },
-        placeholder: "___.___.___.___"
+        {
+          'header': 2
+        }],
+        [
+        {
+          'list': 'ordered'
+        },
+        {
+          'list': 'bullet'
+        }],
+        [
+        {
+          'script': 'sub'
+        },
+        {
+          'script': 'super'
+        }],
+        [
+        {
+          'indent': '-1'
+        },
+        {
+          'indent': '+1'
+        }], // outdent/indent
+        [
+        {
+          'direction': 'rtl'
+        }], // text direction
+        [
+        {
+          'color': []
+        },
+        {
+          'background': []
+        }], // dropdown with defaults from theme
+        [
+        {
+          'align': []
+        }],
+        ['clean'] // remove formatting button
+      ];
+      var quill = new Quill(editor,
+      {
+        modules:
+        {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
       });
-      // editor
-      var editor = document.getElementById('editor');
-      if (editor)
-      {
-        var toolbarOptions = [
-          [
-          {
-            'font': []
-          }],
-          [
-          {
-            'header': [1, 2, 3, 4, 5, 6, false]
-          }],
-          ['bold', 'italic', 'underline', 'strike'],
-          ['blockquote', 'code-block'],
-          [
-          {
-            'header': 1
-          },
-          {
-            'header': 2
-          }],
-          [
-          {
-            'list': 'ordered'
-          },
-          {
-            'list': 'bullet'
-          }],
-          [
-          {
-            'script': 'sub'
-          },
-          {
-            'script': 'super'
-          }],
-          [
-          {
-            'indent': '-1'
-          },
-          {
-            'indent': '+1'
-          }], // outdent/indent
-          [
-          {
-            'direction': 'rtl'
-          }], // text direction
-          [
-          {
-            'color': []
-          },
-          {
-            'background': []
-          }], // dropdown with defaults from theme
-          [
-          {
-            'align': []
-          }],
-          ['clean'] // remove formatting button
-        ];
-        var quill = new Quill(editor,
-        {
-          modules:
-          {
-            toolbar: toolbarOptions
-          },
-          theme: 'snow'
-        });
-      }
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function()
-      {
-        'use strict';
-        window.addEventListener('load', function()
-        {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form)
-          {
-            form.addEventListener('submit', function(event)
-            {
-              if (form.checkValidity() === false)
-              {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
+    }
     </script>
-	<script>
-      var uptarg = document.getElementById('drag-drop-area');
-      if (uptarg)
-      {
-        var uppy = Uppy.Core().use(Uppy.Dashboard,
-        {
-          inline: true,
-          target: uptarg,
-          proudlyDisplayPoweredByUppy: false,
-          theme: 'dark',
-          width: 770,
-          height: 210,
-          plugins: ['Webcam']
-        }).use(Uppy.Tus,
-        {
-          endpoint: 'https://master.tus.io/files/'
-        });
-        uppy.on('complete', (result) => {
-          console.log('Upload complete! We’ve uploaded these files:', result.successful)
-        });
-      }
-    </script>
-	<script src="js/apps.js"></script>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
-	<script>
-      window.dataLayer = window.dataLayer || [];
+  <!--   <script>
+      function setThumbnail(event) {
+        var reader = new FileReader();
 
-      function gtag()
-      {
-        dataLayer.push(arguments);
+        reader.onload = function(event) {
+          var img = document.createElement("img");
+          img.setAttribute("src", event.target.result);
+          document.querySelector("#image_container").appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[0]);
       }
-      gtag('js', new Date());
-      gtag('config', 'UA-56159088-1');
-    </script>
+    </script> -->
+    <script type="text/javascript">
+	// 콘텐츠 수정 :: 사진 수정 시 이미지 미리보기
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgArea').attr('src', e.target.result); 
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$(":input[name='product_img']").change(function() {
+		if( $(":input[name='product_img']").val() == '' ) {
+			$('#imgArea').attr('src' , '');  
+		}
+		$('#imgViewArea').css({ 'display' : '' });
+		readURL(this);
+	});
+
+	// 이미지 에러 시 미리보기영역 미노출
+	function imgAreaError(){
+		$('#imgViewArea').css({ 'display' : 'none' });
+	}
+</script>
 </body>
 </html>

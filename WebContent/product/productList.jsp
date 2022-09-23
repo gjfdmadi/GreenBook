@@ -1,8 +1,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="semiProject.uploadProduct.ProductBean"%>
+<%@page import="product.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
+<%@page import="product.ProductDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -59,7 +59,24 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
                 $('.product_sub').hide();
             }
         }
-    </script>
+        
+        //최상단 체크박스 클릭시 상품목록 전체클릭.
+        $(document).ready(function() {
+        	$(".cbx_chkAll").click(function() {
+        		if($(".cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+        		else $("input[name=chk]").prop("checked", false);
+        	});
+
+        	$("input[name=chk]").click(function() {
+        		var total = $("input[name=chk]").length;
+        		var checked = $("input[name=chk]:checked").length;
+
+        		if(total != checked) $(".cbx_chkAll").prop("checked", false);
+        		else $(".cbx_chkAll").prop("checked", true); 
+        	});
+        });
+</script>
+    
 </head>
 <body class="vertical  light  ">
 	<div class="wrapper">
@@ -87,7 +104,7 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 										<tr>
 											<th>
 												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input allCheck" id="all2"> <label class="custom-control-label" for="all2">NO</label>
+													<input type="checkbox" class="custom-control-input cbx_chkAll" id="all2"> <label class="custom-control-label" for="all2">NO</label>
 												</div>
 											</th>
 											<th>상품명</th>
@@ -113,7 +130,7 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 											create_date = updb.getImg(product_number).getCreate_date();
 										%>
 										<tr>
-											<td><input type="checkbox" class="check" >NO.<%=product_number%></td>
+											<td><input type="checkbox" class="check" name="chk">NO.<%=product_number%></td>
 											<td><img style="width: 100px" height="100px" src="${pageContext.request.contextPath}/img/<%=stored_file_name%>"><br>상품명:<%=product_name%></td>
 											<td><%=product_price%>원</td>
 											<td><%=category_code%></td>
@@ -315,20 +332,6 @@ String path = request.getSession().getServletContext().getRealPath("\\img");
 		gtag('js', new Date());
 		gtag('config', 'UA-56159088-1');
 		
-		var allCheck = document.querySelector(".allCheck");
-		var list = document.querySelectorAll(".check");
-		
-		allCheck.onclick = ()=>{
-			if(allCheck.checkecd){
-				for(var i=0;i<.length;i++) {
-					list[i].checked = true;
-				}
-			}else {
-				for(var i=0;i<list.length;i++) {
-					list[i].checked = false;
-				}
-			}
-		}
 	</script>
 </body>
 </html>

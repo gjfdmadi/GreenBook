@@ -1,5 +1,5 @@
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
-<%@page import="semiProject.uploadProduct.ProductBean"%>
+<%@page import="product.ProductDBBean"%>
+<%@page import="product.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

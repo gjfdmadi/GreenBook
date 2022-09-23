@@ -1,6 +1,7 @@
 <%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <%@page import="semiProject.uploadProduct.ProductBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("utf-8");%>
 <!DOCTYPE html>
 <%
 	String pageNum = request.getParameter("pageNum");
@@ -9,11 +10,11 @@
 	ProductBean upbd = updb.getproduct(product_number, false);
 	
 	//System.out.println("넘버어어어어어어어어어어어어"+product_number);
-	
+	System.out.println("name============"+upbd.getProduct_name()+"===!!!!!!============");
 %>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -34,89 +35,60 @@
 <!-- Date Range Picker CSS -->
 <link rel="stylesheet" href="css/daterangepicker.css">
 <!-- App CSS -->
-<link rel="stylesheet" href="css/app-light.css" id="lightTheme" disabled>
-<link rel="stylesheet" href="css/app-dark.css" id="darkTheme">
-<script language="JavaScript" src="../js/uploadProduct.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/app-light.css" id="lightTheme">
+<link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
+<script language="JavaScript" src="../js/uploadProduct.js" charset="UTF-8"></script>
 </head>
 <body class="vertical  dark  ">
 	<div class="wrapper">
-		<main role="main" class="main-content">
 			<form name="up_prodc" action="adminIndex.jsp?pages=../product/editProduct_ok&product_number=<%=product_number%>&pageNum=<%=pageNum%>" method="post">
 				<div class="container-fluid">
-					<div class="row justify-content-center">
-						<div class="col-12">
-							<h2 class="page-title">File Uploads</h2>
-							<p class="lead text-muted">Demo for form control styles, layout options, and custom components for creating a wide variety of forms.</p>
-							<div class="row mb-4">
-								<div class="col-md-6">
-									<div class="card shadow mb-4">
-										<input type="hidden" name="product_number" value="<%=product_number%>">
-										<table>
-											<tr class="product_category">
-												<td><label class="dress_label" style="width: 100px;">옷 카테고리</label></td>
-												<td><select name="category_code">
-														<option value="none">=== 선택 ===</option>
-														<option value="t-shirt">티셔츠</option>
-														<option value="hude-t">후드티</option>
-														<option value="nite">니트/스웨터</option>
-														<option value="shirt">셔츠/남방</option>
-														<option value="pants">바지</option>
-														<option value="blue-jeans">청바지</option>
-												</select></td>
-											</tr>
-											<tr class="product_name">
-												<td><label class="product_name_label">상품 이름 </label>&nbsp;</td>
-												<td><input type="text" name="product_name" value="<%=upbd.getProduct_name()%>"></td>
-											</tr>
-											<tr class="product_price">
-												<td><label class="product_price_label">상품 가격</label>&nbsp;</td>
-												<td><input type="number" name="product_price" value="<%=upbd.getProduct_price() %>"> 원</td>
-											</tr>
-											<tr class="product_stock">
-												<td><label class="product_stock">재고 수량</label>&nbsp;</td>
-												<td><input type="number" name="product_stock" value="<%=upbd.getProduct_stock() %>"> 개 남았습니다.</td>
-											</tr>
-											<tr class="product_desc">
-												<td><label class="product_desc_label">상품 설명</label>&nbsp;</td>
-												<td><textarea rows="2" cols="60" name="product_desc" value="<%=upbd.getProduct_desc() %>"></textarea></td>
-											</tr>
-										</table>
-										<div class="d-none" id="uploadPreviewTemplate">
-											<div class="card mt-1 mb-0 shadow-none border">
-												<div class="p-2">
-													<div class="row align-items-center">
-														<div class="col-auto">
-															<img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-														</div>
-														<div class="col pl-0">
-															<a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
-															<p class="mb-0" data-dz-size></p>
-														</div>
-														<div class="col-auto">
-															<!-- Button -->
-															<a href="" class="btn btn-link btn-lg text-muted" data-dz-remove> <i class="dripicons-cross"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<table>
-											<tr>
-												<td>
-													<input type="button" value="상품 등록" onclick="check_ok()">&nbsp; 
-													<input type="reset" value="다시작성"> 
-													<input type="button" value="등록한 상품 목록" 
-													onclick="location.href='adminIndex.jsp?pages=../product/productList&product_number=<%=product_number%>&pageNum=<%= pageNum %>'">
-												</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		          <div class="row justify-content-center">
+		            <div class="col-12">
+		              <h2 class="page-title">상품등록</h2>
+		              <p class="text-muted">상품등록을 위한 폼입니다.</p>
+		                <div class="card-body">
+		                  <div class="row">
+		                      <div class="col-md-12">
+		                        <div class="form-group mb-3">
+		                            <label for="custom-select">상품 카테고리</label>
+		                            <select class="custom-select" id="custom-select" name="category_code">
+			                            <option selected value="none">=== 선택 ===</option>
+			                            <option value="t-shirt">티셔츠</option>
+			                            <option value="hude-t">후드티</option>
+			                            <option value="nite">니트/스웨터</option>
+			                            <option value="shirt">셔츠/남방</option>
+			                            <option value="pants">바지</option>
+			                            <option value="blue-jeans">청바지</option>
+		                            </select>
+		                          </div>
+		                      <div class="form-group mb-3">
+		                        <label for="simpleinput">상품명</label>
+		                        <input type="text" name="product_name" class="form-control" value="<%=upbd.getProduct_name()%>">
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label class="product_name_label">상품 가격</label>
+		                        <input type="number" name="product_price" class="form-control" value="<%=upbd.getProduct_price() %>" >
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label class="product_stock">재고 수량</label>
+		                        <input type="number" name="product_stock" class="form-control" value="<%=upbd.getProduct_stock() %>">
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label for="example-textarea">상품 설명</label>
+		                        <textarea class="form-control" id="example-textarea" rows="4" name="product_desc"></textarea>
+		                      </div>
+		                      <input type="button" class="btn mb-2 btn-primary" value="상품 등록" onclick="check_ok()"></input>
+                      <input type="reset" class="btn mb-2 btn-danger" value="다시 작성"></input>
+                      <input type="button" class="btn mb-2 btn-info" value="등록한 상품 목록" onclick="location.href='adminIndex.jsp?pages=../product/productList&product_number=<%=product_number%>&pageNum=<%= pageNum %>'"></input>
+		                    </div> <!-- /.col -->
+		                </div> <!-- row /.col -->
+		                </div> <!-- card -->
+		              </div> <!-- end section -->
+		            </div> <!-- .col-12 -->
+		          </div> <!-- .row -->
+		          
+		        </div> <!-- .container-fluid -->
 				</div>
 			</form>
 			<div class="modal fade modal-notif modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
@@ -245,7 +217,6 @@
 					</div>
 				</div>
 			</div>
-		</main>
 		<!-- main -->
 	</div>
 	<!-- .wrapper -->
@@ -477,7 +448,7 @@
         {
           endpoint: 'https://master.tus.io/files/'
         });
-        uppy.on('complete', (result) => {
+        uppy.on('complete', (result) = > {
           console.log('Upload complete! We’ve uploaded these files:', result.successful)
         });
       }

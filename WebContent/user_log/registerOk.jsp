@@ -9,7 +9,7 @@
 <%
 	MemberDBBean manager = MemberDBBean.getInstance();
 	
-	if(manager.confirmID(mb.getUser_id()) == 1){
+	if(manager.confirmID(mb.getUser_id()) == 0){
 		System.out.println("@@@###getMem_id ===>"+ manager.confirmID(mb.getUser_id()));
 %>		
 		<script>

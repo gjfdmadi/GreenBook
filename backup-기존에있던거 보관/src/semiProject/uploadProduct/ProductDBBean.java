@@ -13,6 +13,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.jspsmart.upload.Request;
+
 /*
  * UploadProductBean의 매개변수는 upbd로 통일
  * UploadProudctDBBean의 매개변수는 updb로 통일
@@ -298,6 +300,7 @@ public class ProductDBBean {
 	}
 	
 	public int updateProduct(ProductBean upbd) throws Exception{
+		
 		int re=-1;
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -328,6 +331,8 @@ public class ProductDBBean {
 			pstmt.setString(1, upbd.getCategory_code());
 			pstmt.setInt(2, upbd.getProduct_number());
 			pstmt.executeUpdate(); 
+			
+			System.out.println(upbd.getProduct_name());
 			re=1;
 		}catch(SQLException ex){
 			System.out.println("수정 실패");

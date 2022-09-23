@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%request.setCharacterEncoding("UTF-8"); %>
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%@page import="product.ProductDBBean"%>
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<jsp:useBean id="upbd" class="semiProject.uploadProduct.ProductBean"></jsp:useBean>
+<jsp:useBean id="upbd" class="product.ProductBean"></jsp:useBean>
 <jsp:setProperty property="*" name="upbd"/>
 <%
 	String pageNum = request.getParameter("pageNum");

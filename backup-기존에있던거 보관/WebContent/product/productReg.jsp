@@ -1,5 +1,5 @@
-<%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <%@page import="semiProject.uploadProduct.ProductBean"%>
+<%@page import="semiProject.uploadProduct.ProductDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -41,220 +41,70 @@ if (upbd != null) {
 <!-- Date Range Picker CSS -->
 <link rel="stylesheet" href="css/daterangepicker.css">
 <!-- App CSS -->
-<link rel="stylesheet" href="css/app-light.css" id="lightTheme" disabled>
-<link rel="stylesheet" href="css/app-dark.css" id="darkTheme">
+<link rel="stylesheet" href="css/app-light.css" id="lightTheme">
+<link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
 <script language="JavaScript" src="../js/uploadProduct.js" charset="utf-8"></script>
 </head>
 <body class="vertical  dark  ">
 	<div class="wrapper">
-		<main role="main" class="main-content">
 			<form name="up_prodc" action="adminIndex.jsp?pages=../product/productReg_ok&product_number=<%=product_number%>&pageNum=<%=pageNum%>" method="post" enctype="multipart/form-data">
-				<div class="container-fluid">
-					<div class="row justify-content-center">
-						<div class="col-12">
-							<h2 class="page-title">File Uploads</h2>
-							<p class="lead text-muted">Demo for form control styles, layout options, and custom components for creating a wide variety of forms.</p>
-							<div class="row mb-4">
-								<div class="col-md-6">
-									<div class="card shadow mb-4">
-										<input type="hidden" name="product_number" value="<%=product_number%>">
-										<table>
-											<tr class="product_category">
-												<td><label class="dress_label" style="width: 100px;">옷 카테고리</label></td>
-												<td><select name="category_code">
-														<option value="none">=== 선택 ===</option>
-														<option value="t-shirt">티셔츠</option>
-														<option value="hude-t">후드티</option>
-														<option value="nite">니트/스웨터</option>
-														<option value="shirt">셔츠/남방</option>
-														<option value="pants">바지</option>
-														<option value="blue-jeans">청바지</option>
-												</select></td>
-											</tr>
-											<tr class="product_name">
-												<td><label class="product_name_label">상품 이름 </label>&nbsp;</td>
-												<td><input type="text" name="product_name"></td>
-											</tr>
-											<tr class="product_price">
-												<td><label class="product_price_label">상품 가격</label>&nbsp;</td>
-												<td><input type="number" name="product_price"> 원</td>
-											</tr>
-											<tr class="product_stock">
-												<td><label class="product_stock">재고 수량</label>&nbsp;</td>
-												<td><input type="number" name="product_stock"> 개 남았습니다.</td>
-											</tr>
-											<tr class="product_desc">
-												<td><label class="product_desc_label">상품 설명</label>&nbsp;</td>
-												<td><textarea rows="4" cols="50" name="product_desc"></textarea></td>
-											</tr>
-											<tr class="product_img">
-												<td>이미지 등록</td>
-												<td><input type="file" name="product_img"></td>
-											</tr>
-										</table>
-										<div class="d-none" id="uploadPreviewTemplate">
-											<div class="card mt-1 mb-0 shadow-none border">
-												<div class="p-2">
-													<div class="row align-items-center">
-														<div class="col-auto">
-															<img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-														</div>
-														<div class="col pl-0">
-															<a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
-															<p class="mb-0" data-dz-size></p>
-														</div>
-														<div class="col-auto">
-															<!-- Button -->
-															<a href="" class="btn btn-link btn-lg text-muted" data-dz-remove> <i class="dripicons-cross"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<table>
-											<tr>
-												<td>
-													<input type="button" value="상품 등록" onclick="check_ok()">&nbsp;
-													<input type="reset" value="다시작성"> 
-													<input type="button" value="등록한 상품 목록" onclick="location.href='adminIndex.jsp?pages=../product/productList'">
-												</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+		        <div class="container-fluid">
+		          <div class="row justify-content-center">
+		            <div class="col-12">
+		              <h2 class="page-title">상품등록</h2>
+		              <p class="text-muted">상품등록을 위한 폼입니다.</p>
+		              
+		                <div class="card-body">
+		                    
+		                  <div class="row">
+		                      <div class="col-md-12">
+		                        <div class="form-group mb-3">
+		                            <label for="custom-select">상품 카테고리</label>
+		                            <select class="custom-select" id="custom-select" name="category_code">
+		                            <option selected value="none">=== 선택 ===</option>
+		                            <option value="t-shirt">티셔츠</option>
+		                            <option value="hude-t">후드티</option>
+		                            <option value="nite">니트/스웨터</option>
+		                            <option value="shirt">셔츠/남방</option>
+		                            <option value="pants">바지</option>
+		                            <option value="blue-jeans">청바지</option>
+		                            </select>
+		                          </div>
+		                      <div class="form-group mb-3">
+		                        <label for="simpleinput">상품명</label>
+		                        <input type="text" name="product_name" class="form-control">
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label class="product_name_label">상품 가격</label>
+		                        <input type="number" name="product_price" class="form-control" placeholder="원" >
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label class="product_stock">재고 수량</label>
+		                        <input type="number" name="product_stock" class="form-control" placeholder="개">
+		                      </div>
+		                      <div class="form-group mb-3">
+		                        <label for="example-textarea">상품 설명</label>
+		                        <textarea class="form-control" id="example-textarea" rows="4" name="product_desc"></textarea>
+		                      </div>
+		                      <div class="form-group col-md-12 mb-3">
+		                      <label for="example-fileinput">이미지</label>
+		                      <br>
+		                      <input type="file" id="example-fileinput" class="form-control-file" name="product_img">
+		                      </div>
+		                      
+		                      <input type="button" class="btn mb-2 btn-primary" value="상품 등록" onclick="check_ok()"></input>
+                      <input type="reset" class="btn mb-2 btn-danger" value="다시 작성"></input>
+                      <input type="button" class="btn mb-2 btn-info" value="등록한 상품 목록" onclick="location.href='adminIndex.jsp?pages=../product/productList'"></input>
+		                    </div> <!-- /.col -->
+		                </div> <!-- row /.col -->
+		                </div> <!-- card -->
+		              </div> <!-- end section -->
+		            </div> <!-- .col-12 -->
+		          </div> <!-- .row -->
+		          
+		        </div> <!-- .container-fluid -->
 			</form>
-			<div class="modal fade modal-notif modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="defaultModalLabel">Notifications</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="list-group list-group-flush my-n3">
-								<div class="list-group-item bg-transparent">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="fe fe-box fe-24"></span>
-										</div>
-										<div class="col">
-											<small><strong>Package has uploaded successfull</strong></small>
-											<div class="my-0 text-muted small">Package is zipped and uploaded</div>
-											<small class="badge badge-pill badge-light text-muted">1m ago</small>
-										</div>
-									</div>
-								</div>
-								<div class="list-group-item bg-transparent">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="fe fe-download fe-24"></span>
-										</div>
-										<div class="col">
-											<small><strong>Widgets are updated successfull</strong></small>
-											<div class="my-0 text-muted small">Just create new layout Index, form, table</div>
-											<small class="badge badge-pill badge-light text-muted">2m ago</small>
-										</div>
-									</div>
-								</div>
-								<div class="list-group-item bg-transparent">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="fe fe-inbox fe-24"></span>
-										</div>
-										<div class="col">
-											<small><strong>Notifications have been sent</strong></small>
-											<div class="my-0 text-muted small">Fusce dapibus, tellus ac cursus commodo</div>
-											<small class="badge badge-pill badge-light text-muted">30m ago</small>
-										</div>
-									</div>
-									<!-- / .row -->
-								</div>
-								<div class="list-group-item bg-transparent">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="fe fe-link fe-24"></span>
-										</div>
-										<div class="col">
-											<small><strong>Link was attached to menu</strong></small>
-											<div class="my-0 text-muted small">New layout has been attached to the menu</div>
-											<small class="badge badge-pill badge-light text-muted">1h ago</small>
-										</div>
-									</div>
-								</div>
-								<!-- / .row -->
-							</div>
-							<!-- / .list-group -->
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear All</button>
-						</div>
-					</div>
-				</div>
 			</div>
-			<div class="modal fade modal-shortcut modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="defaultModalLabel">Shortcuts</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body px-5">
-							<div class="row align-items-center">
-								<div class="col-6 text-center">
-									<div class="squircle bg-success justify-content-center">
-										<i class="fe fe-cpu fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Control area</p>
-								</div>
-								<div class="col-6 text-center">
-									<div class="squircle bg-primary justify-content-center">
-										<i class="fe fe-activity fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Activity</p>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col-6 text-center">
-									<div class="squircle bg-primary justify-content-center">
-										<i class="fe fe-droplet fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Droplet</p>
-								</div>
-								<div class="col-6 text-center">
-									<div class="squircle bg-primary justify-content-center">
-										<i class="fe fe-upload-cloud fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Upload</p>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col-6 text-center">
-									<div class="squircle bg-primary justify-content-center">
-										<i class="fe fe-users fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Users</p>
-								</div>
-								<div class="col-6 text-center">
-									<div class="squircle bg-primary justify-content-center">
-										<i class="fe fe-settings fe-32 align-self-center text-white"></i>
-									</div>
-									<p>Settings</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
 		<!-- main -->
 	</div>
 	<!-- .wrapper -->

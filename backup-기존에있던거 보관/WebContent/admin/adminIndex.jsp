@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!doctype html>
 <%
 	String pages = "";
@@ -33,10 +34,10 @@
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="css/daterangepicker.css">
     <!-- App CSS -->
-    <link rel="stylesheet" href="css/app-light.css" id="lightTheme" disabled>
-    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme?a=b">
+    <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme?a=b" disabled>
   </head>
-  <body class="vertical  dark  ">
+  <body class="vertical  light  ">
     <div class="wrapper">
     	<nav class="topnav navbar navbar-light">
 	        <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
@@ -63,7 +64,7 @@
         	<nav class="vertnav navbar navbar-light">
           <!-- nav bar -->
           <div class="w-100 mb-4 d-flex">
-            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="../index.jsp">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="../user_page/index.jsp">
               <svg version="1.1" id="logo" class="navbar-brand-img brand-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">
                 <g>
                   <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />

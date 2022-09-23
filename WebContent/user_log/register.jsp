@@ -110,7 +110,8 @@
           </div>
           <div class="form-group1">
             <label for="ID">ID</label>
-            <input type="text" class="form-control" id="ID" name="user_id">
+            <input type="text" class="form-control" id="id" name="user_id">
+            <span id="msg"></span>
           </div>
           <div class="row mb-4">
             <div class="col-md-6">
@@ -180,6 +181,39 @@
     </div>
     
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+    	$('#ID').on("keyup",(function(){
+    		var $checkID = $("#id").val();
+    		var params = "?user_id="+$checkID;
+    		
+    		var $msg = $("#msg");
+    		
+    		if($checkID == ""){
+    			console.log("아이디 없음")
+    			return;
+    		}
+    		
+    		$.ajax({
+    			type : "post",
+    			url : "./checkid.jsp",
+    			data : {"id": $checkID},
+    			dataType : "html",
+    			async : true,
+    			success : function(data){
+    				console.log("data : "+data)
+    				if (data.trim() =="true") {
+						$msg.html("<h4>아이디가 이미 존재합니다</h4>");
+					}else{
+						$msg.html("<h4>사용가능한 아이디 입니다</h4>")
+					}
+    			},
+    			error : function(){
+    				alert("서버요청 실패");
+    			}
+    		})
+    	})
+    </script>
     <script src="js/popper.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
